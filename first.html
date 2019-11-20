@@ -1,0 +1,38 @@
+<html lang="en">
+<head>
+    <title>First</title>
+</head>
+<body>
+<h1 id="text">
+    You will need to find the right place to use this one
+</h1>
+<script type="text/javascript">
+    const text = document.getElementById('text');
+
+    // detect current location and add function to update it
+    window.currentLocation = {
+        latitude: 0.0,
+        longitude: 0.0,
+    };
+    updateLocation();
+
+    function updateLocation() {
+        navigator.geolocation.getCurrentPosition(
+            async (position) => {
+                window.currentLocation.latitude = position.coords.latitude;
+                window.currentLocation.longitude = position.coords.longitude;
+                setTimeout(updateLocation, 10000);
+                alert(JSON.stringify(window.currentLocation));
+            },
+            (error) => {
+                console.error('Error on location update:', error);
+            },
+            {
+                enableHighAccuracy: true,
+                maximumAge: 1000,
+            }
+        );
+    }
+</script>
+</body>
+</html>

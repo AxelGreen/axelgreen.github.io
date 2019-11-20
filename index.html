@@ -1,0 +1,45 @@
+<html>
+<head>
+</head>
+<body>
+<button type="button" onclick="alert(`latitude: ${window.currentLocation.latitude}, longitude: ${window.currentLocation.longitude}`)">Show location</button>
+<button type="button" onclick="alert(`x: ${window.currentOrientation.x}, y: ${window.currentOrientation.y}, z: ${window.currentOrientation.z}`)">Show orientation</button>
+<script type="text/javascript">
+    // detect current orientation and add listener for orientation change
+    window.currentOrientation = {
+        x: 0.0,
+        y: 0.0,
+        z: 0.0,
+    };
+    window.addEventListener('deviceorientation', (event) => {
+        window.currentOrientation.x = event.alpha;
+        window.currentOrientation.y = event.beta;
+        window.currentOrientation.z = event.gamma;
+    }, true);
+
+    // detect current location and add function to update it
+    window.currentLocation = {
+        latitude: 0.0,
+        longitude: 0.0,
+    };
+    updateLocation();
+
+    function updateLocation() {
+        navigator.geolocation.getCurrentPosition(
+            async (position) => {
+                window.currentLocation.latitude = position.coords.latitude;
+                window.currentLocation.longitude = position.coords.longitude;
+                setTimeout(updateLocation, 10000);
+            },
+            (error) => {
+                console.error('Error on location update:', error);
+            },
+            {
+                enableHighAccuracy: true,
+                maximumAge: 1000,
+            }
+        );
+    }
+</script>
+</body>
+</html>
