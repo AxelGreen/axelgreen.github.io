@@ -33,16 +33,23 @@
         );
     }
 
-    setInterval(() => {
+    const foundInterval = setInterval(async () => {
         if (
             window.currentLocation.latitude > 50 &&
             window.currentLocation.latitude < 51 &&
             window.currentLocation.longitude > 30 &&
             window.currentLocation.longitude < 31
         ) {
-            text.innerText = 'You find a place!';
+            clearInterval(foundInterval);
+            await placeFound();
         }
     }, 10000);
+
+    async function placeFound() {
+        text.innerText = 'You found it! Now try to look around and find a clues!';
+    }
+
+
 </script>
 </body>
 </html>
