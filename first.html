@@ -12,8 +12,8 @@
 <h6 id="y"></h6>
 <script type="text/javascript">
     const text = document.getElementById('text');
-    const x = document.getElementById('x');
-    const y = document.getElementById('y');
+    const xText = document.getElementById('x');
+    const yText = document.getElementById('y');
 
     // detect current location and add function to update it
     window.currentLocation = {
@@ -58,8 +58,8 @@
         window.addEventListener('deviceorientation', (event) => {
 
             // TODO: delete when done
-            x.innerText = String(event.alpha);
-            y.innerText = String(event.beta);
+            xText.innerText = String(event.alpha);
+            yText.innerText = String(event.beta);
 
             // x: 0 - 360
             // y: 0 - 180. < 30 - looking down
