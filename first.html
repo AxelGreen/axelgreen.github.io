@@ -22,10 +22,9 @@
                 window.currentLocation.latitude = position.coords.latitude;
                 window.currentLocation.longitude = position.coords.longitude;
                 setTimeout(updateLocation, 10000);
-                alert(JSON.stringify(window.currentLocation));
             },
             (error) => {
-                console.error('Error on location update:', error);
+                alert(`Error on location update: ${error.message}`);
             },
             {
                 enableHighAccuracy: true,
@@ -33,6 +32,17 @@
             }
         );
     }
+
+    setInterval(() => {
+        if (
+            window.currentLocation.latitude > 50 &&
+            window.currentLocation.latitude < 51 &&
+            window.currentLocation.longitude > 30 &&
+            window.currentLocation.longitude < 31
+        ) {
+            text.innerText = 'You find a place!';
+        }
+    }, 10000);
 </script>
 </body>
 </html>
