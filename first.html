@@ -52,22 +52,46 @@
     }, 10000);
 
     async function placeFound() {
-        text.innerText = 'You found it! Now try to look around and find a clues!';
+        const fountText = 'You found it! Now try to look around and find a clues!';
+        text.innerText = fountText;
 
         window.addEventListener('deviceorientation', (event) => {
 
+            // TODO: delete when done
             x.innerText = String(event.alpha);
             y.innerText = String(event.beta);
 
-            // if (
-            //     event.alpha > -30 &&
-            //     event.alpha < 30 &&
-            //     event.beta > -30 &&
-            //     event.beta < 30
-            // ) {
-            //     text.innerText = 'found text';
-            // }
+            // x: 0 - 360
+            // y: 0 - 180. < 30 - looking down
 
+            const x = event.alpha;
+            const y = event.beta;
+
+
+            if (
+                event.alpha > 0 &&
+                event.alpha < 30 &&
+                event.beta > 60 &&
+                event.beta < 90
+            ) {
+                text.innerText = 'first one';
+            } else if (
+                event.alpha > 210 &&
+                event.alpha < 240 &&
+                event.beta > 150 &&
+                event.beta < 180
+            ) {
+                text.innerText = 'second one';
+            } else if (
+                event.alpha > 120 &&
+                event.alpha < 150 &&
+                event.beta > 120 &&
+                event.beta < 150
+            ) {
+                text.innerText = 'third one';
+            } else {
+                text.innerText = fountText;
+            }
         }, true);
     }
 
