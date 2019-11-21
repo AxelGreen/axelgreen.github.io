@@ -47,6 +47,21 @@
 
     async function placeFound() {
         text.innerText = 'You found it! Now try to look around and find a clues!';
+
+        window.addEventListener('deviceorientation', (event) => {
+
+            if (
+                event.alpha > 0 &&
+                event.alpha < 90 &&
+                event.beta > 0 &&
+                event.beta < 90 &&
+                event.gamma > 0 &&
+                event.gamma < 90
+            ) {
+                text.innerText = 'found text';
+            }
+
+        }, true);
     }
 
 
