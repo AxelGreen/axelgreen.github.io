@@ -6,8 +6,14 @@
 <h1 id="text">
     You will need to find the right place to use this one
 </h1>
+<label>x</label>
+<h6 id="x"></h6>
+<label>y</label>
+<h6 id="y"></h6>
 <script type="text/javascript">
     const text = document.getElementById('text');
+    const x = document.getElementById('x');
+    const y = document.getElementById('y');
 
     // detect current location and add function to update it
     window.currentLocation = {
@@ -50,16 +56,17 @@
 
         window.addEventListener('deviceorientation', (event) => {
 
-            if (
-                event.alpha > 0 &&
-                event.alpha < 90 &&
-                event.beta > 0 &&
-                event.beta < 90 &&
-                event.gamma > 0 &&
-                event.gamma < 90
-            ) {
-                text.innerText = 'found text';
-            }
+            x.innerText = String(event.alpha);
+            y.innerText = String(event.beta);
+
+            // if (
+            //     event.alpha > -30 &&
+            //     event.alpha < 30 &&
+            //     event.beta > -30 &&
+            //     event.beta < 30
+            // ) {
+            //     text.innerText = 'found text';
+            // }
 
         }, true);
     }
